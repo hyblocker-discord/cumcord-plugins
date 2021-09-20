@@ -1,0 +1,7 @@
+{
+  "name": "Hyblocker Theme Helper",
+  "description": "Allows Themes to do things which require Javascript such as proper ripple and rendering the cursor as a light",
+  "author": "Hyblocker",
+  "file": "theme-helper.js",
+  "license": "MIT"
+}
