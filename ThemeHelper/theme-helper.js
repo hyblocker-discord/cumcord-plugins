@@ -29,10 +29,7 @@ export default (data) => {
 	return {
 
 		onLoad() {
-			this.mouseEventBind = this.mouseEventBind.bind(this)
-			this._numberToRgb = this._numberToRgb.bind(this)
-			this._numberToRgba = this._numberToRgba.bind(this)
-			this._rgbToNumber = this._rgbToNumber.bind(this)
+			this.mouseEventBind = this.mouseEventBind.bind(this);
 			_this = this;
 			_this.userCache = {};
 			_this.store = data.persist.store;
@@ -204,7 +201,14 @@ export default (data) => {
 			if (_this.userCache[user.id]) {
 				savedUser = _this.userCache[user.id];
 			} else {
-			 	savedUser = _this.userCache[userId];
+				savedUser = _this.store[userId];
+				if (Object.keys(savedUser).length == 0) {
+					savedUser = {
+						bannerURL: null,
+						accentColor: null,
+						autoAccent: null,
+					}
+				}
 			}
 
 			// Check for a diff if the user was saved
@@ -235,7 +239,7 @@ export default (data) => {
 			} else {
 				_this.userCache[userId] = _this.store[userId];
 				
-				if (!_this.userCache[userId]) {
+				if (Object.keys(_this.userCache[userId]).length == 0) {
 					_this.userCache[userId] = {
 						bannerURL: null,
 						accentColor: null,
