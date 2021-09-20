@@ -33,6 +33,7 @@ export default (data) => {
 			_this = this;
 			_this.userCache = {};
 			_this.store = data.persist.store;
+			_this.ghostStore = data.persist.ghost;
 
 			document.body.addEventListener("mousemove", this.mouseEventBind("mouse"));
 			document.body.addEventListener("mousedown", this.mouseEventBind("click"));
@@ -162,7 +163,7 @@ export default (data) => {
 			res.props.children = function() { return modified };
 
 			return res;
-			}catch(ex){log(`[FATAL]: ${ex.stack}`);return res;}
+			}catch(ex){log(`[FATAL]: ${ex}`);return res;}
 		},
 
 		// Stolen from https://github.com/powercord-community/rolecolor-everywhere/blob/master/index.js#L388-L394
@@ -175,7 +176,6 @@ export default (data) => {
 		},
 
 		_numberToRgb (color) {
-			console.log(color); // i hate js i want c++ back
 			const r = (color & 0xFF0000) >>> 16;
 			const g = (color & 0xFF00) >>> 8;
 			const b = color & 0xFF;
@@ -202,14 +202,14 @@ export default (data) => {
 			if (_this.userCache[user.id]) {
 				savedUser = _this.userCache[user.id];
 			} else {
-				savedUser = _this.store[userId];
-				if (Object.keys(savedUser).length == 0) {
+				savedUser = _this.ghostStore[userId];
+				if (!savedUser) {
 					savedUser = {
-						bannerURL: null,
-						accentColor: null,
-						autoAccent: null,
-					}
-				}
+		 				bannerURL: null,
+		 				accentColor: null,
+		 				autoAccent: null,
+		 			}
+			 	}
 			}
 
 			// Check for a diff if the user was saved
@@ -235,20 +235,18 @@ export default (data) => {
 		},
 		
 		fetchUser(userId) {
-			if (_this.userCache[userId]) {
-				return _this.userCache[userId];
-			} else {
-				_this.userCache[userId] = _this.store[userId];
+			if (!_this.userCache[userId]) {
+				_this.userCache[userId] = _this.ghostStore[userId];
 				
-				if (Object.keys(_this.userCache[userId]).length == 0) {
+				if (!_this.userCache[userId]) {
 					_this.userCache[userId] = {
 						bannerURL: null,
 						accentColor: null,
 						autoAccent: null,
 					};
 				}
-				return _this.userCache[userId];
 			}
+			return _this.userCache[userId];
 		}
 	}
 }
