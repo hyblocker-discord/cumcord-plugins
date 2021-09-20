@@ -30,6 +30,9 @@ export default (data) => {
 
 		onLoad() {
 			this.mouseEventBind = this.mouseEventBind.bind(this)
+			this._numberToRgb = this._numberToRgb.bind(this)
+			this._numberToRgba = this._numberToRgba.bind(this)
+			this._rgbToNumber = this._rgbToNumber.bind(this)
 			_this = this;
 			_this.userCache = {};
 			_this.store = data.persist.store;
