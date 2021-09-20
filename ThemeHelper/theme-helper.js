@@ -5,6 +5,7 @@ import { webpack } from "@cumcord/modules";
 import { React } from "@cumcord/modules/common";
 
 // list of elements which we whitelist giving the mouse position to
+// TODO: imagine hardcoding :trolley:
 const rippleElements = [
 	'message-2qnXI6',
 	'container-2Pjhx-',
@@ -31,7 +32,7 @@ export default (data) => {
 			this.mouseEventBind = this.mouseEventBind.bind(this)
 			_this = this;
 			_this.userCache = {};
-			_this.store = data.store;
+			_this.store = data.persist.store;
 
 			document.body.addEventListener("mousemove", this.mouseEventBind("mouse"));
 			document.body.addEventListener("mousedown", this.mouseEventBind("click"));
@@ -50,12 +51,11 @@ export default (data) => {
 
 			document.body.removeEventListener("mousemove", this.mouseEventBind("mouse"));
 			document.body.removeEventListener("mousedown", this.mouseEventBind("click"));
-			// 
-			// uninject("theme-helper-friendRowPatch");
+
 			for (let i = 0; i < injections.length; i++) {
 				injections[i]();
 			}
-			array.length = 0;
+			injections.length = 0;
 		},
 
 		mouseEventBind(param) {
