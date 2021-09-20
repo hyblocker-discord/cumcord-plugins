@@ -21,7 +21,7 @@ module.exports = class CumcordLoader {
 		}
 		
 		// Import Theme Helper!!!!!!!!
-		await window.cumcord.plugins.importPlugin("https://hyblocker-discord.github.io/cumcord-plugins/ThemeHelper/dist/");
+		window.cumcord.plugins.importPlugin("https://hyblocker-discord.github.io/cumcord-plugins/ThemeHelper/dist/");
 
 		console.log("Loaded!");
 	}
