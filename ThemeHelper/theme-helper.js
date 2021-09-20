@@ -162,7 +162,7 @@ export default (data) => {
 			res.props.children = function() { return modified };
 
 			return res;
-			}catch(ex){log(`[FATAL]: ${ex}`);return res;}
+			}catch(ex){log(`[FATAL]: ${ex.stack}`);return res;}
 		},
 
 		// Stolen from https://github.com/powercord-community/rolecolor-everywhere/blob/master/index.js#L388-L394
@@ -175,6 +175,7 @@ export default (data) => {
 		},
 
 		_numberToRgb (color) {
+			console.log(color); // i hate js i want c++ back
 			const r = (color & 0xFF0000) >>> 16;
 			const g = (color & 0xFF00) >>> 8;
 			const b = color & 0xFF;
