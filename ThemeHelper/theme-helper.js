@@ -106,7 +106,7 @@ export default (data) => {
 		},
 
 		friendRowPatch(_, res) {
-
+			try {
 			const items = res.props.children();
 			const userObj = findInReactTree(items, e=> e && e.user)?.user;
 			const userData = _this.fetchUser(userObj.id);
@@ -162,6 +162,7 @@ export default (data) => {
 			res.props.children = function() { return modified };
 
 			return res;
+			}catch(ex){log(`[FATAL]: ${ex}`);return res;}
 		},
 
 		// Stolen from https://github.com/powercord-community/rolecolor-everywhere/blob/master/index.js#L388-L394
