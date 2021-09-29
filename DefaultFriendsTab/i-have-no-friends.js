@@ -10,6 +10,13 @@ let injections = [];
 export default ({ persist }) => {
   const TabBar = webpack.findByDisplayName("TabBar");
 
+  async function waitFor (selector) {
+    const item = document.querySelectorAll(selector)[0];
+    if (!item)
+      return new Promise(window.requestAnimationFrame(waitFor(selector)));
+    return new Promise(item);
+  }
+
   return {
     onLoad() {
       injections.push(

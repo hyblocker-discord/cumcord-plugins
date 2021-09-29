@@ -6,11 +6,7 @@ const RadioGroup = webpack.findByDisplayName("RadioGroup");
 const Messages = i18n.Messages;
 
 export default ({ persist }) => {
-  console.log("persist");
-  console.log(persist);
   useNest(persist);
-  const store = persist.store;
-  const ghost = persist.ghost;
 
   return (
     <RadioGroup
@@ -21,9 +17,9 @@ export default ({ persist }) => {
           { name: Messages.BLOCKED, value: 'BLOCKED' }
         ]}
         value={
-          ghost.tab === undefined ? 'ONLINE' : ghost.tab }
+          persist.ghost.tab === undefined ? 'ONLINE' : persist.ghost.tab }
         onChange={e => {
-          store.tab = e;
+          persist.store.tab = e.value;
         }}
       >
         {Messages.DEFAULT_TAB}
