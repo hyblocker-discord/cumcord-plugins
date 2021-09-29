@@ -20,6 +20,7 @@ const rippleElements = [
   "item-2J2GlB",
   "actionButton-VzECiy",
   "autocompleteRowVertical-q1K4ky",
+  'button-38aScr',
 ];
 
 let injections = [];
