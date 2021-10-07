@@ -4,5 +4,6 @@
   "author": "Hyblocker",
   "authorID": "346338830011596800",
   "file": "theme-helper.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dist": "https://hyblocker-discord.github.io/cumcord-plugins/ThemeHelper/dist/"
 }
